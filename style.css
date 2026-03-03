@@ -1,0 +1,247 @@
+:root {
+    --primary-bg: linear-gradient(135deg, #f48c25 0%, #a430d4 100%);
+    --card-back: rgba(255, 255, 255, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-color: #ffffff;
+    --accent-color: #f9f906;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--primary-bg);
+    height: 100vh;
+    height: 100dvh;
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Splash Screen */
+#splash-screen .logo {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    animation: pulse 2s infinite;
+}
+
+.loader {
+    width: 200px;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+    animation: load 2s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Main Menu */
+#main-menu .title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: #333;
+    border: none;
+    padding: 1.2rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(249, 249, 6, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.menu-footer {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Game Board */
+.game-header {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    font-weight: 600;
+}
+
+.btn-pause {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 1px solid var(--glass-border);
+}
+
+.card-back {
+    background: var(--card-back);
+    backdrop-filter: blur(5px);
+}
+
+.card-front {
+    background: white;
+    color: #333;
+    transform: rotateY(180deg);
+}
+
+/* Victory Screen */
+.victory-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+}
+
+.trophy {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px var(--accent-color));
+}
+
+.victory-panel h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.final-stats {
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    margin-top: 15px;
+    cursor: pointer;
+}
